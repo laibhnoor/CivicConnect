@@ -99,7 +99,7 @@ const Register = () => {
                       name="name"
                       type="text"
                       autoComplete="name"
-                      className="appearance-none relative block w-full px-3 py-3 pl-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+                      className="appearance-none relative block w-full px-3 py-3 pl-10 border border-gray-300 bg-white placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
                       placeholder="Enter your full name"
                     />
                     <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -118,7 +118,7 @@ const Register = () => {
                       name="email"
                       type="email"
                       autoComplete="email"
-                      className="appearance-none relative block w-full px-3 py-3 pl-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+                      className="appearance-none relative block w-full px-3 py-3 pl-10 border border-gray-300 bg-white placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
                       placeholder="Enter your email"
                     />
                     <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -135,7 +135,7 @@ const Register = () => {
                     as="select"
                     id="role"
                     name="role"
-                    className="mt-1 block w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                    className="mt-1 block w-full px-3 py-3 border border-gray-300 bg-white text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 sm:text-sm"
                   >
                     <option value="citizen">Citizen - Report issues in your community</option>
                     <option value="staff">Staff - Manage and resolve issues</option>
@@ -154,7 +154,7 @@ const Register = () => {
                       name="password"
                       type={showPassword ? 'text' : 'password'}
                       autoComplete="new-password"
-                      className="appearance-none relative block w-full px-3 py-3 pl-10 pr-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+                      className="appearance-none relative block w-full px-3 py-3 pl-10 pr-10 border border-gray-300 bg-white placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
                       placeholder="Create a strong password"
                     />
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -184,7 +184,7 @@ const Register = () => {
                       name="confirmPassword"
                       type={showConfirmPassword ? 'text' : 'password'}
                       autoComplete="new-password"
-                      className="appearance-none relative block w-full px-3 py-3 pl-10 pr-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+                      className="appearance-none relative block w-full px-3 py-3 pl-10 pr-10 border border-gray-300 bg-white placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
                       placeholder="Confirm your password"
                     />
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />

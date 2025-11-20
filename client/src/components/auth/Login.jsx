@@ -83,7 +83,7 @@ const Login = () => {
                       name="email"
                       type="email"
                       autoComplete="email"
-                      className="appearance-none relative block w-full px-3 py-3 pl-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                      className="appearance-none relative block w-full px-3 py-3 pl-10 border border-gray-300 bg-white placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                       placeholder="Enter your email"
                     />
                     <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -102,7 +102,7 @@ const Login = () => {
                       name="password"
                       type={showPassword ? 'text' : 'password'}
                       autoComplete="current-password"
-                      className="appearance-none relative block w-full px-3 py-3 pl-10 pr-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                      className="appearance-none relative block w-full px-3 py-3 pl-10 pr-10 border border-gray-300 bg-white placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                       placeholder="Enter your password"
                     />
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -154,15 +154,6 @@ const Login = () => {
               </Form>
             )}
           </Formik>
-        </div>
-
-        {/* Demo Credentials */}
-        <div className="bg-blue-50 rounded-lg p-4">
-          <h3 className="text-sm font-medium text-blue-800 mb-2">Demo Credentials:</h3>
-          <div className="text-xs text-blue-700 space-y-1">
-            <p><strong>Admin:</strong> admin@civicconnect.gov / admin123</p>
-            <p><strong>Staff:</strong> staff@civicconnect.gov / staff123</p>
-          </div>
         </div>
       </div>
     </div>
