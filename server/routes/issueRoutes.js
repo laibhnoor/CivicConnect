@@ -3,14 +3,29 @@ import express from "express";
 import {
   createIssue,
   getIssues,
-  updateIssueStatus,
+  getIssueById,
+  updateIssue,
+  deleteIssue,
+  addComment,
+  getIssueStats,
+  uploadMiddleware,
+  uploadResolutionMiddleware,
 } from "../controllers/issueController.js";
-import { authMiddleware } from "../middleware/authMiddleware.js";
+import { authMiddleware, adminOnly, staffOrAdmin } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/", authMiddleware, createIssue);
+// Public routes
 router.get("/", getIssues);
-router.put("/:id", authMiddleware, updateIssueStatus);
+router.get("/stats", authMiddleware, staffOrAdmin, getIssueStats);
+router.get("/:id", getIssueById);
+
+// Authenticated routes
+router.post("/", authMiddleware, uploadMiddleware, createIssue);
+router.put("/:id", authMiddleware, staffOrAdmin, uploadResolutionMiddleware, updateIssue);
+router.delete("/:id", authMiddleware, adminOnly, deleteIssue);
+
+// Comments
+router.post("/:id/comments", authMiddleware, addComment);
 
 export default router;
