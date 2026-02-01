@@ -133,13 +133,18 @@ const IssueForm = ({ onSuccess, onCancel }) => {
         formData.append('photo', selectedFile);
       }
 
-      const token = localStorage.getItem('token');
-      const response = await axios.post('http://localhost:5000/api/issues', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${token}`,
-        },
-      });
+     const token = localStorage.getItem('token');
+const response = await axios.post(
+  `${import.meta.env.VITE_API_BASE_URL}/issues`,
+  formData,
+  {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
+
 
       toast.success('Issue reported successfully! Thank you for your contribution.');
       

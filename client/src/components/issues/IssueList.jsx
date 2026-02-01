@@ -67,11 +67,11 @@ const IssueList = ({ userRole = 'citizen' }) => {
       }
 
       const response = await axios.get(
-        `http://localhost:5000/api/issues?${params.toString()}`,
-        {
-          headers: token ? { Authorization: `Bearer ${token}` } : {},
-        }
-      );
+      `${import.meta.env.VITE_API_BASE_URL}/issues?${params.toString()}`,
+      {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      }
+    );
 
       // Store all fetched issues for client-side search
       setAllIssues(response.data);
@@ -103,18 +103,18 @@ const IssueList = ({ userRole = 'citizen' }) => {
       return;
     }
 
-    try {
-      const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/issues/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      toast.success('Issue deleted successfully');
-      fetchIssues();
-    } catch (error) {
-      console.error('Error deleting issue:', error);
-      toast.error('Failed to delete issue');
-    }
-  };
+   try {
+    const token = localStorage.getItem('token');
+    await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/issues/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    toast.success('Issue deleted successfully');
+    fetchIssues();
+  } catch (error) {
+    console.error('Error deleting issue:', error);
+    toast.error('Failed to delete issue');
+  }
+};
 
   const getStatusIcon = (status) => {
     switch (status) {

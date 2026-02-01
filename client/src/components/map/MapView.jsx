@@ -96,9 +96,9 @@ const MapView = ({ issues: propIssues, filters = {} }) => {
       if (filters.category) params.append('category', filters.category);
       if (filters.priority) params.append('priority', filters.priority);
 
-      const response = await axios.get(
-        `http://localhost:5000/api/issues?${params.toString()}`
-      );
+     const response = await axios.get(
+      `${import.meta.env.VITE_API_BASE_URL}/issues?${params.toString()}`
+    );
       setIssues(response.data);
     } catch (error) {
       console.error('Error fetching issues:', error);

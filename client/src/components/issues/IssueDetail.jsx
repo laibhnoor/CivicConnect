@@ -11,13 +11,14 @@ import {
   MessageSquare,
   Edit,
   Trash2,
-  Camera,
   Send,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import MapView from '../map/MapView';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const IssueDetail = () => {
   const { id } = useParams();
@@ -42,7 +43,7 @@ const IssueDetail = () => {
 
   const fetchIssue = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/issues/${id}`);
+      const response = await axios.get(`${API_BASE_URL}/issues/${id}`);
       setIssue(response.data);
     } catch (error) {
       console.error('Error fetching issue:', error);
@@ -56,7 +57,7 @@ const IssueDetail = () => {
   const fetchStaffUsers = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/users/staff', {
+      const response = await axios.get(`${API_BASE_URL}/users/staff`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setStaffUsers(response.data);
@@ -69,7 +70,7 @@ const IssueDetail = () => {
     try {
       const token = localStorage.getItem('token');
       const formData = new FormData();
-      
+
       Object.keys(values).forEach((key) => {
         if (values[key] !== undefined && values[key] !== null) {
           formData.append(key, values[key]);
@@ -77,7 +78,7 @@ const IssueDetail = () => {
       });
 
       const response = await axios.put(
-        `http://localhost:5000/api/issues/${id}`,
+        `${API_BASE_URL}/issues/${id}`,
         formData,
         {
           headers: {
@@ -103,7 +104,7 @@ const IssueDetail = () => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/issues/${id}`, {
+      await axios.delete(`${API_BASE_URL}/issues/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success('Issue deleted successfully');
@@ -117,13 +118,9 @@ const IssueDetail = () => {
   const handleAddComment = async (values, { resetForm }) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.post(
-        `http://localhost:5000/api/issues/${id}/comments`,
-        values,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      await axios.post(`${API_BASE_URL}/issues/${id}/comments`, values, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       toast.success('Comment added successfully');
       resetForm();
       setShowCommentForm(false);
@@ -381,7 +378,7 @@ const IssueDetail = () => {
                     <div>
                       <p className="text-sm text-gray-600 mb-2">Report Photo</p>
                       <img
-                        src={`http://localhost:5000${issue.photo_url}`}
+                        src={`${API_BASE_URL}${issue.photo_url}`}
                         alt="Issue"
                         className="w-full h-64 object-cover rounded-lg"
                       />
@@ -391,7 +388,7 @@ const IssueDetail = () => {
                     <div>
                       <p className="text-sm text-gray-600 mb-2">Resolution Photo</p>
                       <img
-                        src={`http://localhost:5000${issue.resolution_photo_url}`}
+                        src={`${API_BASE_URL}${issue.resolution_photo_url}`}
                         alt="Resolution"
                         className="w-full h-64 object-cover rounded-lg"
                       />
@@ -467,9 +464,7 @@ const IssueDetail = () => {
                   issue.comments.map((comment) => (
                     <div
                       key={comment.id}
-                      className={`p-4 rounded-lg ${
-                        comment.is_internal ? 'bg-yellow-50 border border-yellow-200' : 'bg-gray-50'
-                      }`}
+                      className={`p-4 rounded-lg ${comment.is_internal ? 'bg-yellow-50 border border-yellow-200' : 'bg-gray-50'}`}
                     >
                       <div className="flex items-start justify-between mb-2">
                         <div className="flex items-center space-x-2">
@@ -535,4 +530,3 @@ const IssueDetail = () => {
 };
 
 export default IssueDetail;
-

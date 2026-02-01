@@ -4,6 +4,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const NotificationBell = () => {
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
@@ -40,7 +42,7 @@ const NotificationBell = () => {
       const token = localStorage.getItem('token');
       if (!token) return;
 
-      const response = await axios.get('http://localhost:5000/api/notifications', {
+      const response = await axios.get(`${API_BASE_URL}/notifications`, {
         headers: { Authorization: `Bearer ${token}` },
         params: { limit: 10 },
       });
@@ -56,7 +58,7 @@ const NotificationBell = () => {
       const token = localStorage.getItem('token');
       if (!token) return;
 
-      const response = await axios.get('http://localhost:5000/api/notifications/unread-count', {
+      const response = await axios.get(`${API_BASE_URL}/notifications/unread-count`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUnreadCount(response.data.count);
@@ -69,11 +71,9 @@ const NotificationBell = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `http://localhost:5000/api/notifications/${id}/read`,
+        `${API_BASE_URL}/notifications/${id}/read`,
         {},
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       setNotifications(
         notifications.map(n => (n.id === id ? { ...n, is_read: true } : n))
@@ -88,11 +88,9 @@ const NotificationBell = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        'http://localhost:5000/api/notifications/read-all',
+        `${API_BASE_URL}/notifications/read-all`,
         {},
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       setNotifications(notifications.map(n => ({ ...n, is_read: true })));
       setUnreadCount(0);
@@ -104,12 +102,8 @@ const NotificationBell = () => {
   };
 
   const handleNotificationClick = (notification) => {
-    if (!notification.is_read) {
-      markAsRead(notification.id);
-    }
-    if (notification.issue_id) {
-      navigate(`/issues/${notification.issue_id}`);
-    }
+    if (!notification.is_read) markAsRead(notification.id);
+    if (notification.issue_id) navigate(`/issues/${notification.issue_id}`);
     setIsOpen(false);
   };
 
@@ -133,9 +127,7 @@ const NotificationBell = () => {
       <button
         onClick={() => {
           setIsOpen(!isOpen);
-          if (!isOpen) {
-            fetchNotifications();
-          }
+          if (!isOpen) fetchNotifications();
         }}
         className="relative p-2 text-gray-400 hover:text-gray-500 transition-colors"
       >
@@ -161,10 +153,7 @@ const NotificationBell = () => {
                   Mark all read
                 </button>
               )}
-              <button
-                onClick={() => setIsOpen(false)}
-                className="text-gray-400 hover:text-gray-500"
-              >
+              <button onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-gray-500">
                 <X className="h-5 w-5" />
               </button>
             </div>
@@ -196,17 +185,13 @@ const NotificationBell = () => {
                             <span className="h-2 w-2 bg-blue-600 rounded-full flex-shrink-0"></span>
                           )}
                         </div>
-                        <p className="text-sm text-gray-600 line-clamp-2">
-                          {notification.message}
-                        </p>
+                        <p className="text-sm text-gray-600 line-clamp-2">{notification.message}</p>
                         {notification.issue_title && (
                           <p className="text-xs text-gray-500 mt-1">
                             Issue: {notification.issue_title}
                           </p>
                         )}
-                        <p className="text-xs text-gray-400 mt-2">
-                          {formatTime(notification.created_at)}
-                        </p>
+                        <p className="text-xs text-gray-400 mt-2">{formatTime(notification.created_at)}</p>
                       </div>
                       {!notification.is_read && (
                         <button
@@ -243,4 +228,3 @@ const NotificationBell = () => {
 };
 
 export default NotificationBell;
-

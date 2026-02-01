@@ -88,12 +88,7 @@ const Dashboard = () => {
         }
       }
 
-      const response = await axios.get(`http://localhost:5000/api/issues?${params.toString()}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-
+       
       const issuesData = response.data;
       setIssues(issuesData);
 
@@ -117,14 +112,18 @@ const Dashboard = () => {
     }
   };
 
-  const fetchStats = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/issues/stats', {
+ const fetchStats = async () => {
+  try {
+    const token = localStorage.getItem('token');
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_BASE_URL}/issues/stats`,
+      {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
-      });
+      }
+    );
+
 
       if (response.data.overall) {
         setStats({

@@ -35,14 +35,14 @@ const Register = () => {
   });
 
   const handleSubmit = async (values, { setSubmitting }) => {
-    setIsLoading(true);
-    try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', {
-        name: values.name,
-        email: values.email,
-        password: values.password,
-        role: values.role,
-      });
+  setIsLoading(true);
+  try {
+    const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/register`, {
+      name: values.name,
+      email: values.email,
+      password: values.password,
+      role: values.role,
+    });
 
       toast.success('Registration successful! Please sign in.');
       
