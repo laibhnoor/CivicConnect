@@ -18,7 +18,7 @@ import MapView from '../map/MapView';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
-import { API_BASE_URL } from './config';
+import { API_BASE_URL } from '../../config';
 
 
 const IssueDetail = () => {

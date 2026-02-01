@@ -6,7 +6,7 @@ import axios from 'axios';
 import { AlertCircle, CheckCircle, Clock, MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-import { API_BASE_URL } from './config';
+import { API_BASE_URL } from '../../config';
 
 
 // Fix for default marker icons in React-Leaflet

@@ -29,7 +29,7 @@ import NotificationBell from '../notifications/NotificationBell';
 import MapView from '../map/MapView';
 import IssueList from '../issues/IssueList';
 
-import { API_BASE_URL } from './config';
+import { API_BASE_URL } from '../../config';
 
 
 ChartJS.register(

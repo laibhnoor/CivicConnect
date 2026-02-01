@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Eye, EyeOff, Mail, Lock, User, UserPlus } from 'lucide-react';
 import toast from 'react-hot-toast';
 
-import { API_BASE_URL } from './config';
+import { API_BASE_URL } from '../../config';
 
 
 const Register = () => {
