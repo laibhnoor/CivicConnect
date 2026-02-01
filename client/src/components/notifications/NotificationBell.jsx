@@ -4,7 +4,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { API_BASE_URL } from './config';
+
 
 const NotificationBell = () => {
   const [notifications, setNotifications] = useState([]);

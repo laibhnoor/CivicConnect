@@ -15,6 +15,9 @@ import {
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
+import { API_BASE_URL } from './config';
+
+
 const IssueForm = ({ onSuccess, onCancel }) => {
   const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState(null);
@@ -135,7 +138,7 @@ const IssueForm = ({ onSuccess, onCancel }) => {
 
      const token = localStorage.getItem('token');
 const response = await axios.post(
-  `${import.meta.env.VITE_API_BASE_URL}/issues`,
+  `${API_BASE_URL}/issues`,
   formData,
   {
     headers: {

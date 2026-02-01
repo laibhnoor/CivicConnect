@@ -6,6 +6,9 @@ import axios from 'axios';
 import { Eye, EyeOff, Mail, Lock, LogIn } from 'lucide-react';
 import toast from 'react-hot-toast';
 
+import { API_BASE_URL } from './config';
+
+
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +26,7 @@ const Login = () => {
   const handleSubmit = async (values, { setSubmitting }) => {
   setIsLoading(true);
   try {
-    const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, {
+    const response = await axios.post(`${API_BASE_URL}/auth/login`, {
       email: values.email,
       password: values.password,
     });

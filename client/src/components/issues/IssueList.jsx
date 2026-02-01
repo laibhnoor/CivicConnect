@@ -14,6 +14,9 @@ import {
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
+import { API_BASE_URL } from './config';
+
+
 const IssueList = ({ userRole = 'citizen' }) => {
   const [issues, setIssues] = useState([]);
   const [allIssues, setAllIssues] = useState([]); // Store all fetched issues for client-side search
@@ -67,7 +70,7 @@ const IssueList = ({ userRole = 'citizen' }) => {
       }
 
       const response = await axios.get(
-      `${import.meta.env.VITE_API_BASE_URL}/issues?${params.toString()}`,
+      `${API_BASE_URL}/issues?${params.toString()}`,
       {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       }
@@ -105,7 +108,7 @@ const IssueList = ({ userRole = 'citizen' }) => {
 
    try {
     const token = localStorage.getItem('token');
-    await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/issues/${id}`, {
+    await axios.delete(`${API_BASE_URL}/issues/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     toast.success('Issue deleted successfully');

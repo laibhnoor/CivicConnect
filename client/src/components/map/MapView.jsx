@@ -6,6 +6,9 @@ import axios from 'axios';
 import { AlertCircle, CheckCircle, Clock, MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
+import { API_BASE_URL } from './config';
+
+
 // Fix for default marker icons in React-Leaflet
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -97,7 +100,7 @@ const MapView = ({ issues: propIssues, filters = {} }) => {
       if (filters.priority) params.append('priority', filters.priority);
 
      const response = await axios.get(
-      `${import.meta.env.VITE_API_BASE_URL}/issues?${params.toString()}`
+      `${API_BASE_URL}/issues?${params.toString()}`
     );
       setIssues(response.data);
     } catch (error) {

@@ -29,6 +29,9 @@ import NotificationBell from '../notifications/NotificationBell';
 import MapView from '../map/MapView';
 import IssueList from '../issues/IssueList';
 
+import { API_BASE_URL } from './config';
+
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -116,7 +119,7 @@ const Dashboard = () => {
   try {
     const token = localStorage.getItem('token');
     const response = await axios.get(
-      `${import.meta.env.VITE_API_BASE_URL}/issues/stats`,
+      `${API_BASE_URL}/issues/stats`,
       {
         headers: {
           'Authorization': `Bearer ${token}`,

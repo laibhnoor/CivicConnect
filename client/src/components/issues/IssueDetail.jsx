@@ -18,7 +18,8 @@ import MapView from '../map/MapView';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { API_BASE_URL } from './config';
+
 
 const IssueDetail = () => {
   const { id } = useParams();
