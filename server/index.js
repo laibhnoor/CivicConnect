@@ -11,6 +11,7 @@ import userRoutes from "./routes/userRoutes.js";
 import pool from "./db.js";
 
 dotenv.config();
+
 const app = express();
 
 // Get __dirname equivalent for ES modules
@@ -18,15 +19,29 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // CORS configuration
+const allowedOrigins = [
+  'http://localhost:5173',                     // local frontend
+  process.env.CLIENT_URL || '',                // deployed frontend from env
+];
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: function(origin, callback) {
+    // allow requests with no origin (like Postman or server-to-server)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = `The CORS policy for this site does not allow access from the specified Origin.`;
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   credentials: true
 }));
 
+// Body parsing
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Serve static files (uploaded images)
+// Serve static files (uploads)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes
@@ -44,15 +59,17 @@ console.log("✅ User routes loaded at /api/users");
 
 // Test DB connection
 app.get("/", async (req, res) => {
-  const result = await pool.query("SELECT NOW()");
-  res.json({ server: "running", time: result.rows[0].now });
+  try {
+    const result = await pool.query("SELECT NOW()");
+    res.json({ server: "running", time: result.rows[0].now });
+  } catch (error) {
+    console.error("DB connection error:", error);
+    res.status(500).json({ error: "Database connection failed" });
+  }
 });
 
-console.log("Loaded .env PORT:", process.env.PORT);
-
-
-
-app.listen(process.env.PORT, () =>
-  console.log(`✅ Server running on port ${process.env.PORT}`)
+// Start server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () =>
+  console.log(`✅ Server running on port ${PORT}`)
 );
-
