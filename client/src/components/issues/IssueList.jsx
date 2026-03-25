@@ -122,11 +122,11 @@ const IssueList = ({ userRole = 'citizen' }) => {
   const getStatusIcon = (status) => {
     switch (status) {
       case 'pending':
-        return <Clock className="h-4 w-4 text-yellow-500" />;
+        return <Clock className="h-4 w-4 text-gray-500" />;
       case 'in_progress':
-        return <AlertCircle className="h-4 w-4 text-blue-500" />;
+        return <AlertCircle className="h-4 w-4 text-gray-500" />;
       case 'resolved':
-        return <CheckCircle className="h-4 w-4 text-green-500" />;
+        return <CheckCircle className="h-4 w-4 text-gray-500" />;
       default:
         return <Clock className="h-4 w-4 text-gray-500" />;
     }
@@ -135,11 +135,11 @@ const IssueList = ({ userRole = 'citizen' }) => {
   const getStatusColor = (status) => {
     switch (status) {
       case 'pending':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-gray-100 text-gray-800';
       case 'in_progress':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-gray-200 text-gray-900';
       case 'resolved':
-        return 'bg-green-100 text-green-800';
+        return 'bg-gray-300 text-gray-900';
       default:
         return 'bg-gray-100 text-gray-800';
     }
@@ -148,13 +148,13 @@ const IssueList = ({ userRole = 'citizen' }) => {
   const getPriorityColor = (priority) => {
     switch (priority) {
       case 'urgent':
-        return 'bg-red-100 text-red-800';
+        return 'bg-gray-300 text-gray-900';
       case 'high':
-        return 'bg-orange-100 text-orange-800';
+        return 'bg-gray-200 text-gray-900';
       case 'medium':
-        return 'bg-yellow-100 text-yellow-800';
-      case 'low':
         return 'bg-gray-100 text-gray-800';
+      case 'low':
+        return 'bg-gray-50 text-gray-700';
       default:
         return 'bg-gray-100 text-gray-800';
     }
@@ -207,7 +207,7 @@ const IssueList = ({ userRole = 'citizen' }) => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
       </div>
     );
   }
@@ -215,7 +215,7 @@ const IssueList = ({ userRole = 'citizen' }) => {
   return (
     <div className="space-y-4">
       {/* Search and Filter Bar */}
-      <div className="bg-white rounded-lg shadow p-4">
+      <div className="border border-gray-200 p-4">
         <div className="flex flex-col md:flex-row gap-4">
           {/* Search */}
           <div className="flex-1 relative">
@@ -225,17 +225,17 @@ const IssueList = ({ userRole = 'citizen' }) => {
               placeholder="Search issues..."
               value={filters.search}
               onChange={(e) => setFilters({ ...filters, search: e.target.value })}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 bg-white"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 focus:outline-none focus:border-gray-400 text-gray-900 bg-white text-sm"
             />
           </div>
 
           {/* Filter Toggle */}
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-gray-700 bg-white font-medium"
+            className="flex items-center px-4 py-2 border border-gray-300 hover:bg-gray-50 transition-colors text-gray-700 bg-white text-sm"
           >
-            <Filter className="h-5 w-5 mr-2 text-gray-600" />
-            <span className="text-gray-700">Filters</span>
+            <Filter className="h-4 w-4 mr-2 text-gray-600" />
+            <span>Filters</span>
           </button>
         </div>
 
@@ -243,13 +243,13 @@ const IssueList = ({ userRole = 'citizen' }) => {
         {showFilters && (
           <div className="mt-4 pt-4 border-t border-gray-200 grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-900 mb-1">
                 Status
               </label>
               <select
                 value={filters.status}
                 onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 bg-white"
+                className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:border-gray-400 text-gray-900 bg-white text-sm"
               >
                 {statuses.map((status) => (
                   <option key={status.value} value={status.value}>
@@ -260,13 +260,13 @@ const IssueList = ({ userRole = 'citizen' }) => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-900 mb-1">
                 Category
               </label>
               <select
                 value={filters.category}
                 onChange={(e) => setFilters({ ...filters, category: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 bg-white"
+                className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:border-gray-400 text-gray-900 bg-white text-sm"
               >
                 {categories.map((category) => (
                   <option key={category.value} value={category.value}>
@@ -277,13 +277,13 @@ const IssueList = ({ userRole = 'citizen' }) => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-900 mb-1">
                 Priority
               </label>
               <select
                 value={filters.priority}
                 onChange={(e) => setFilters({ ...filters, priority: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 bg-white"
+                className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:border-gray-400 text-gray-900 bg-white text-sm"
               >
                 {priorities.map((priority) => (
                   <option key={priority.value} value={priority.value}>
@@ -296,7 +296,7 @@ const IssueList = ({ userRole = 'citizen' }) => {
             <div className="md:col-span-3 flex justify-end">
               <button
                 onClick={() => setFilters({ status: '', category: '', priority: '', search: '' })}
-                className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors"
+                className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors text-sm"
               >
                 Clear Filters
               </button>
@@ -306,12 +306,12 @@ const IssueList = ({ userRole = 'citizen' }) => {
       </div>
 
       {/* Issues List */}
-      <div className="bg-white rounded-lg shadow overflow-hidden">
+      <div className="border border-gray-200 overflow-hidden">
         {issues.length === 0 ? (
           <div className="p-12 text-center">
-            <AlertCircle className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No issues found</h3>
-            <p className="text-gray-600">Try adjusting your filters or search terms.</p>
+            <AlertCircle className="h-12 w-12 text-gray-300 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">No issues found</h3>
+            <p className="text-gray-600 text-sm">Try adjusting your filters or search terms.</p>
           </div>
         ) : (
           <div className="divide-y divide-gray-200">
@@ -326,11 +326,11 @@ const IssueList = ({ userRole = 'citizen' }) => {
                     <span className="text-3xl">{getCategoryIcon(issue.category)}</span>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center space-x-2 mb-2">
-                        <h3 className="text-lg font-semibold text-gray-900">
+                        <h3 className="text-base font-semibold text-gray-900">
                           {issue.title}
                         </h3>
                         <span
-                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(
+                          className={`inline-flex items-center px-2.5 py-0.5 text-xs font-medium ${getStatusColor(
                             issue.status
                           )}`}
                         >
@@ -340,15 +340,15 @@ const IssueList = ({ userRole = 'citizen' }) => {
                           </span>
                         </span>
                         <span
-                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getPriorityColor(
+                          className={`inline-flex items-center px-2.5 py-0.5 text-xs font-medium ${getPriorityColor(
                             issue.priority
                           )}`}
                         >
                           {issue.priority || 'medium'}
                         </span>
                       </div>
-                      <p className="text-gray-600 mb-2 line-clamp-2">{issue.description}</p>
-                      <div className="flex items-center space-x-4 text-sm text-gray-500">
+                      <p className="text-gray-600 text-sm mb-2 line-clamp-2">{issue.description}</p>
+                      <div className="flex items-center space-x-4 text-xs text-gray-500">
                         <span>Reported by {issue.reporter}</span>
                         <span>•</span>
                         <span>{new Date(issue.created_at).toLocaleDateString()}</span>
@@ -369,18 +369,18 @@ const IssueList = ({ userRole = 'citizen' }) => {
                     >
                       <button
                         onClick={() => navigate(`/issues/${issue.id}`)}
-                        className="p-2 text-gray-400 hover:text-blue-600 transition-colors"
+                        className="p-2 text-gray-400 hover:text-gray-900 transition-colors"
                         title="View Details"
                       >
-                        <Eye className="h-5 w-5" />
+                        <Eye className="h-4 w-4" />
                       </button>
                       {userRole === 'admin' && (
                         <button
                           onClick={() => handleDelete(issue.id)}
-                          className="p-2 text-gray-400 hover:text-red-600 transition-colors"
+                          className="p-2 text-gray-400 hover:text-gray-900 transition-colors"
                           title="Delete"
                         >
-                          <Trash2 className="h-5 w-5" />
+                          <Trash2 className="h-4 w-4" />
                         </button>
                       )}
                     </div>

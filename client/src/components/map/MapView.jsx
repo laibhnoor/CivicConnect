@@ -197,7 +197,7 @@ const MapView = ({ issues: propIssues, filters = {} }) => {
                 </div>
                 <button
                   onClick={() => navigate(`/issues/${issue.id}`)}
-                  className="mt-2 w-full text-xs bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition-colors"
+                  className="mt-2 w-full text-xs bg-gray-900 text-white px-3 py-1 hover:bg-gray-800 transition-colors"
                 >
                   View Details
                 </button>

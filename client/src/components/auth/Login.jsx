@@ -51,19 +51,17 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+    <div className="min-h-screen bg-white flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full">
+        <div>
           {/* Header */}
-          <div className="text-center">
-            <div className="mx-auto h-12 w-12 bg-blue-600 rounded-full flex items-center justify-center">
-              <LogIn className="h-6 w-6 text-white" />
-            </div>
-            <h2 className="mt-6 text-3xl font-bold text-gray-900">
-              Welcome Back
+          <div className="text-center mb-8">
+            <h1 className="text-2xl font-semibold text-gray-900">CivicConnect</h1>
+            <h2 className="mt-6 text-xl font-semibold text-gray-900">
+              Sign In
             </h2>
-            <p className="mt-2 text-sm text-gray-600">
-              Sign in to your CivicConnect account
+            <p className="mt-2 text-sm text-gray-500">
+              Access your community issues dashboard
             </p>
           </div>
 
@@ -80,16 +78,15 @@ const Login = () => {
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                     Email Address
                   </label>
-                  <div className="mt-1 relative">
+                  <div className="mt-1">
                     <Field
                       id="email"
                       name="email"
                       type="email"
                       autoComplete="email"
-                      className="appearance-none relative block w-full px-3 py-3 pl-10 border border-gray-300 bg-white placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                      placeholder="Enter your email"
+                      className="w-full px-4 py-2 border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-400 sm:text-sm"
+                      placeholder="Email address"
                     />
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                   </div>
                   <ErrorMessage name="email" component="div" className="mt-1 text-sm text-red-600" />
                 </div>
@@ -105,10 +102,9 @@ const Login = () => {
                       name="password"
                       type={showPassword ? 'text' : 'password'}
                       autoComplete="current-password"
-                      className="appearance-none relative block w-full px-3 py-3 pl-10 pr-10 border border-gray-300 bg-white placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                      placeholder="Enter your password"
+                      className="w-full px-4 py-2 border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-400 pr-10 sm:text-sm"
+                      placeholder="Password"
                     />
-                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                     <button
                       type="button"
                       className="absolute right-3 top-1/2 transform -translate-y-1/2"
@@ -125,14 +121,14 @@ const Login = () => {
                 </div>
 
                 {/* Submit Button */}
-                <div>
+                <div className="pt-2">
                   <button
                     type="submit"
                     disabled={isSubmitting || isLoading}
-                    className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                    className="w-full py-2 px-4 bg-gray-900 text-white text-sm font-medium hover:bg-gray-800 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >
                     {isLoading ? (
-                      <div className="flex items-center">
+                      <div className="flex items-center justify-center">
                         <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
                         Signing in...
                       </div>
@@ -143,14 +139,14 @@ const Login = () => {
                 </div>
 
                 {/* Register Link */}
-                <div className="text-center">
+                <div className="text-center pt-4 border-t">
                   <p className="text-sm text-gray-600">
-                    Don't have an account?{' '}
+                    New here?{' '}
                     <Link
                       to="/register"
-                      className="font-medium text-blue-600 hover:text-blue-500 transition-colors duration-200"
+                      className="text-gray-900 font-medium hover:underline"
                     >
-                      Sign up here
+                      Create account
                     </Link>
                   </p>
                 </div>

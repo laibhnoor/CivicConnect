@@ -61,19 +61,17 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+    <div className="min-h-screen bg-white flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full">
+        <div>
           {/* Header */}
-          <div className="text-center">
-            <div className="mx-auto h-12 w-12 bg-green-600 rounded-full flex items-center justify-center">
-              <UserPlus className="h-6 w-6 text-white" />
-            </div>
-            <h2 className="mt-6 text-3xl font-bold text-gray-900">
-              Join CivicConnect
+          <div className="text-center mb-8">
+            <h1 className="text-2xl font-semibold text-gray-900">CivicConnect</h1>
+            <h2 className="mt-6 text-xl font-semibold text-gray-900">
+              Create Account
             </h2>
-            <p className="mt-2 text-sm text-gray-600">
-              Create your account to start reporting issues
+            <p className="mt-2 text-sm text-gray-500">
+              Join your community and report issues
             </p>
           </div>
 
@@ -96,16 +94,15 @@ const Register = () => {
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                     Full Name
                   </label>
-                  <div className="mt-1 relative">
+                  <div className="mt-1">
                     <Field
                       id="name"
                       name="name"
                       type="text"
                       autoComplete="name"
-                      className="appearance-none relative block w-full px-3 py-3 pl-10 border border-gray-300 bg-white placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
-                      placeholder="Enter your full name"
+                      className="w-full px-4 py-2 border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-400 sm:text-sm"
+                      placeholder="Your full name"
                     />
-                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                   </div>
                   <ErrorMessage name="name" component="div" className="mt-1 text-sm text-red-600" />
                 </div>
@@ -115,16 +112,15 @@ const Register = () => {
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                     Email Address
                   </label>
-                  <div className="mt-1 relative">
+                  <div className="mt-1">
                     <Field
                       id="email"
                       name="email"
                       type="email"
                       autoComplete="email"
-                      className="appearance-none relative block w-full px-3 py-3 pl-10 border border-gray-300 bg-white placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
-                      placeholder="Enter your email"
+                      className="w-full px-4 py-2 border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-400 sm:text-sm"
+                      placeholder="Email address"
                     />
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                   </div>
                   <ErrorMessage name="email" component="div" className="mt-1 text-sm text-red-600" />
                 </div>
@@ -138,10 +134,10 @@ const Register = () => {
                     as="select"
                     id="role"
                     name="role"
-                    className="mt-1 block w-full px-3 py-3 border border-gray-300 bg-white text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                    className="mt-1 block w-full px-4 py-2 border border-gray-300 text-gray-900 focus:outline-none focus:border-gray-400 sm:text-sm"
                   >
-                    <option value="citizen">Citizen - Report issues in your community</option>
-                    <option value="staff">Staff - Manage and resolve issues</option>
+                    <option value="citizen">Citizen - Report issues</option>
+                    <option value="staff">Staff - Manage issues</option>
                   </Field>
                   <ErrorMessage name="role" component="div" className="mt-1 text-sm text-red-600" />
                 </div>
@@ -157,10 +153,9 @@ const Register = () => {
                       name="password"
                       type={showPassword ? 'text' : 'password'}
                       autoComplete="new-password"
-                      className="appearance-none relative block w-full px-3 py-3 pl-10 pr-10 border border-gray-300 bg-white placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+                      className="w-full px-4 py-2 border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-400 pr-10 sm:text-sm"
                       placeholder="Create a strong password"
                     />
-                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                     <button
                       type="button"
                       className="absolute right-3 top-1/2 transform -translate-y-1/2"
@@ -187,10 +182,9 @@ const Register = () => {
                       name="confirmPassword"
                       type={showConfirmPassword ? 'text' : 'password'}
                       autoComplete="new-password"
-                      className="appearance-none relative block w-full px-3 py-3 pl-10 pr-10 border border-gray-300 bg-white placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+                      className="w-full px-4 py-2 border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-400 pr-10 sm:text-sm"
                       placeholder="Confirm your password"
                     />
-                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                     <button
                       type="button"
                       className="absolute right-3 top-1/2 transform -translate-y-1/2"
@@ -207,14 +201,14 @@ const Register = () => {
                 </div>
 
                 {/* Submit Button */}
-                <div>
+                <div className="pt-2">
                   <button
                     type="submit"
                     disabled={isSubmitting || isLoading}
-                    className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                    className="w-full py-2 px-4 bg-gray-900 text-white text-sm font-medium hover:bg-gray-800 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >
                     {isLoading ? (
-                      <div className="flex items-center">
+                      <div className="flex items-center justify-center">
                         <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
                         Creating account...
                       </div>
@@ -225,14 +219,14 @@ const Register = () => {
                 </div>
 
                 {/* Login Link */}
-                <div className="text-center">
+                <div className="text-center pt-4 border-t">
                   <p className="text-sm text-gray-600">
                     Already have an account?{' '}
                     <Link
                       to="/login"
-                      className="font-medium text-green-600 hover:text-green-500 transition-colors duration-200"
+                      className="text-gray-900 font-medium hover:underline"
                     >
-                      Sign in here
+                      Sign in
                     </Link>
                   </p>
                 </div>

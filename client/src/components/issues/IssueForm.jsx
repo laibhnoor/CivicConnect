@@ -11,7 +11,8 @@ import {
   CheckCircle, 
   X,
   Loader2,
-  Image as ImageIcon
+  Image as ImageIcon,
+  Plus
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -177,10 +178,19 @@ const response = await axios.post(
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-6">
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Report an Issue</h2>
-        <p className="text-gray-600">Help improve your community by reporting issues you encounter.</p>
+    <div className="max-w-2xl mx-auto bg-white border border-gray-200 p-6">
+      <div className="mb-6 flex items-start justify-between">
+        <div>
+          <h2 className="text-2xl font-semibold text-gray-900 mb-2">Report an Issue</h2>
+          <p className="text-gray-500 text-sm">Help improve your community by reporting issues you encounter.</p>
+        </div>
+        <button
+          onClick={() => onCancel ? onCancel() : navigate('/dashboard')}
+          className="text-gray-400 hover:text-gray-900 transition-colors p-1"
+          aria-label="Close"
+        >
+          <X className="h-6 w-6" />
+        </button>
       </div>
 
       <Formik
@@ -199,14 +209,14 @@ const response = await axios.post(
           <Form className="space-y-6">
             {/* Title Field */}
             <div>
-              <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="title" className="block text-sm font-medium text-gray-900 mb-2">
                 Issue Title *
               </label>
               <Field
                 id="title"
                 name="title"
                 type="text"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white"
+                className="w-full px-4 py-2 border border-gray-300 focus:outline-none focus:border-gray-400 text-gray-900 bg-white text-sm"
                 placeholder="Brief description of the issue"
               />
               <ErrorMessage name="title" component="div" className="mt-1 text-sm text-red-600" />
@@ -214,7 +224,7 @@ const response = await axios.post(
 
             {/* Description Field */}
             <div>
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="description" className="block text-sm font-medium text-gray-900 mb-2">
                 Detailed Description *
               </label>
               <Field
@@ -222,7 +232,7 @@ const response = await axios.post(
                 id="description"
                 name="description"
                 rows={4}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white resize-y"
+                className="w-full px-4 py-2 border border-gray-300 focus:outline-none focus:border-gray-400 text-gray-900 bg-white text-sm resize-none"
                 placeholder="Provide more details about the issue..."
               />
               <ErrorMessage name="description" component="div" className="mt-1 text-sm text-red-600" />
@@ -230,16 +240,16 @@ const response = await axios.post(
 
             {/* Category Selection */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-900 mb-2">
                 Issue Category *
               </label>
               <div className="grid grid-cols-2 gap-3">
                 {categories.map((category) => (
                   <label
                     key={category.value}
-                    className={`relative flex items-center p-3 border-2 rounded-lg cursor-pointer transition-all duration-200 ${
+                    className={`relative flex items-center p-3 border cursor-pointer transition-colors ${
                       values.category === category.value
-                        ? 'border-blue-500 bg-blue-50'
+                        ? 'border-gray-900 bg-gray-50'
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
@@ -254,7 +264,7 @@ const response = await axios.post(
                       <span className="text-sm font-medium text-gray-700">{category.label}</span>
                     </div>
                     {values.category === category.value && (
-                      <CheckCircle className="absolute top-2 right-2 h-5 w-5 text-blue-500" />
+                      <CheckCircle className="absolute top-2 right-2 h-5 w-5 text-gray-600" />
                     )}
                   </label>
                 ))}
@@ -264,7 +274,7 @@ const response = await axios.post(
 
             {/* Location Section */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-900 mb-2">
                 Location *
               </label>
               <div className="space-y-3">
@@ -272,14 +282,14 @@ const response = await axios.post(
                   type="button"
                   onClick={() => getCurrentLocation(setFieldValue)}
                   disabled={isGettingLocation}
-                  className="w-full flex items-center justify-center px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-colors duration-200 disabled:opacity-50"
+                  className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 text-sm hover:bg-gray-50 transition-colors disabled:opacity-50"
                 >
                   {isGettingLocation ? (
-                    <Loader2 className="h-5 w-5 animate-spin text-blue-500 mr-2" />
+                    <Loader2 className="h-4 w-4 animate-spin text-gray-900 mr-2" />
                   ) : (
-                    <MapPin className="h-5 w-5 text-blue-500 mr-2" />
+                    <MapPin className="h-4 w-4 text-gray-900 mr-2" />
                   )}
-                  {isGettingLocation ? 'Getting your location...' : 'Use Current Location'}
+                  {isGettingLocation ? 'Getting location...' : 'Use Current Location'}
                 </button>
 
                 <div className="grid grid-cols-2 gap-3">
@@ -292,7 +302,7 @@ const response = await axios.post(
                       name="latitude"
                       type="number"
                       step="any"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white"
+                      className="w-full px-4 py-2 border border-gray-300 focus:outline-none focus:border-gray-400 text-gray-900 bg-white text-sm"
                       placeholder="e.g., 40.7128"
                     />
                   </div>
@@ -305,7 +315,7 @@ const response = await axios.post(
                       name="longitude"
                       type="number"
                       step="any"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white"
+                      className="w-full px-4 py-2 border border-gray-300 focus:outline-none focus:border-gray-400 text-gray-900 bg-white text-sm"
                       placeholder="e.g., -74.0060"
                     />
                   </div>
@@ -317,19 +327,19 @@ const response = await axios.post(
 
             {/* Photo Upload */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-900 mb-2">
                 Photo (Optional)
               </label>
               <div className="space-y-3">
                 {!previewUrl ? (
                   <div
                     onClick={() => fileInputRef.current?.click()}
-                    className="w-full flex items-center justify-center px-4 py-8 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-400 hover:bg-blue-50 cursor-pointer transition-colors duration-200"
+                    className="w-full flex items-center justify-center px-4 py-8 border-2 border-dashed border-gray-300 hover:border-gray-400 hover:bg-gray-50 cursor-pointer transition-colors"
                   >
                     <div className="text-center">
                       <Camera className="h-8 w-8 text-gray-400 mx-auto mb-2" />
                       <p className="text-sm text-gray-600">Click to upload a photo</p>
-                      <p className="text-xs text-gray-500">PNG, JPG up to 5MB</p>
+                      <p className="text-xs text-gray-500">PNG, JPG, max 5MB</p>
                     </div>
                   </div>
                 ) : (
@@ -337,12 +347,12 @@ const response = await axios.post(
                     <img
                       src={previewUrl}
                       alt="Preview"
-                      className="w-full h-48 object-cover rounded-lg"
+                      className="w-full h-48 object-cover"
                     />
                     <button
                       type="button"
                       onClick={removeImage}
-                      className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors duration-200"
+                      className="absolute top-2 right-2 bg-gray-900 text-white p-1 hover:bg-gray-800 transition-colors"
                     >
                       <X className="h-4 w-4" />
                     </button>
@@ -365,7 +375,7 @@ const response = await axios.post(
                 <button
                   type="button"
                   onClick={onCancel}
-                  className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+                  className="flex-1 px-4 py-2 border border-gray-300 text-gray-900 text-sm hover:bg-gray-50 transition-colors"
                 >
                   Cancel
                 </button>
@@ -373,7 +383,7 @@ const response = await axios.post(
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center justify-center"
+                className="flex-1 inline-flex items-center justify-center px-4 py-2 bg-gray-900 text-white text-sm hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 {isSubmitting ? (
                   <>
@@ -382,8 +392,8 @@ const response = await axios.post(
                   </>
                 ) : (
                   <>
-                    <AlertCircle className="h-4 w-4 mr-2" />
-                    Submit Issue
+                    <Plus className="h-4 w-4 mr-2" />
+                    Report Issue
                   </>
                 )}
               </button>

@@ -91,7 +91,15 @@ const Dashboard = () => {
         }
       }
 
-       
+      const response = await axios.get(
+        `${API_BASE_URL}/issues?${params.toString()}`,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        }
+      );
+      
       const issuesData = response.data;
       setIssues(issuesData);
 
@@ -199,40 +207,34 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <h1 className="text-2xl font-bold text-blue-600">CivicConnect</h1>
-              </div>
-            </div>
+            <h1 className="text-xl font-semibold text-gray-900">CivicConnect</h1>
             
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-6">
               <NotificationBell />
               
-              <div className="flex items-center space-x-2">
-                <User className="h-6 w-6 text-gray-400" />
-                <span className="text-sm font-medium text-gray-700">
+              <div className="flex items-center space-x-3">
+                <span className="text-sm text-gray-600">
                   {user?.name || 'User'}
                 </span>
               </div>
               
               <button
                 onClick={handleLogout}
-                className="flex items-center space-x-1 text-gray-500 hover:text-gray-700"
+                className="text-sm text-gray-600 hover:text-gray-900"
               >
-                <LogOut className="h-4 w-4" />
-                <span className="text-sm">Logout</span>
+                Sign out
               </button>
             </div>
           </div>
@@ -242,116 +244,108 @@ const Dashboard = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-gray-900">
-            Welcome back, {user?.name || 'User'}!
+          <h2 className="text-2xl font-semibold text-gray-900">
+            Dashboard
           </h2>
-          <p className="text-gray-600 mt-2">
-            Manage and track community issues in your area.
+          <p className="text-gray-500 mt-1">
+            Manage and track community issues
           </p>
         </div>
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center">
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <BarChart3 className="h-6 w-6 text-blue-600" />
+          <div className="border border-gray-200 rounded p-6">
+            <div className="flex items-start justify-between">
+              <div>
+                <p className="text-sm text-gray-500">Total Issues</p>
+                <p className="text-2xl font-semibold text-gray-900 mt-2">{stats.total}</p>
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Total Issues</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
-              </div>
+              <BarChart3 className="h-5 w-5 text-gray-400" />
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center">
-              <div className="p-2 bg-yellow-100 rounded-lg">
-                <Clock className="h-6 w-6 text-yellow-600" />
+          <div className="border border-gray-200 rounded p-6">
+            <div className="flex items-start justify-between">
+              <div>
+                <p className="text-sm text-gray-500">Pending</p>
+                <p className="text-2xl font-semibold text-gray-900 mt-2">{stats.pending}</p>
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Pending</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.pending}</p>
-              </div>
+              <Clock className="h-5 w-5 text-gray-400" />
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center">
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <AlertCircle className="h-6 w-6 text-blue-600" />
+          <div className="border border-gray-200 rounded p-6">
+            <div className="flex items-start justify-between">
+              <div>
+                <p className="text-sm text-gray-500">In Progress</p>
+                <p className="text-2xl font-semibold text-gray-900 mt-2">{stats.inProgress}</p>
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">In Progress</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.inProgress}</p>
-              </div>
+              <AlertCircle className="h-5 w-5 text-gray-400" />
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center">
-              <div className="p-2 bg-green-100 rounded-lg">
-                <CheckCircle className="h-6 w-6 text-green-600" />
+          <div className="border border-gray-200 rounded p-6">
+            <div className="flex items-start justify-between">
+              <div>
+                <p className="text-sm text-gray-500">Resolved</p>
+                <p className="text-2xl font-semibold text-gray-900 mt-2">{stats.resolved}</p>
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Resolved</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.resolved}</p>
-              </div>
+              <CheckCircle className="h-5 w-5 text-gray-400" />
             </div>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-wrap gap-4 mb-8">
+        <div className="flex flex-wrap gap-2 mb-8">
           <Link
             to="/report"
-            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
+            className="inline-flex items-center px-4 py-2 bg-gray-900 text-white text-sm hover:bg-gray-800 transition-colors"
           >
-            <Plus className="h-5 w-5 mr-2" />
-            Report New Issue
+            <Plus className="h-4 w-4 mr-2" />
+            Report Issue
           </Link>
           
           <button
             onClick={() => setViewMode('map')}
-            className={`inline-flex items-center px-6 py-3 rounded-lg transition-colors duration-200 ${
+            className={`inline-flex items-center px-4 py-2 text-sm transition-colors ${
               viewMode === 'map'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-gray-900 text-white'
+                : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
             }`}
           >
-            <Map className="h-5 w-5 mr-2" />
-            View Map
+            <Map className="h-4 w-4 mr-2" />
+            Map
           </button>
           
           <button
             onClick={() => setViewMode('list')}
-            className={`inline-flex items-center px-6 py-3 rounded-lg transition-colors duration-200 ${
+            className={`inline-flex items-center px-4 py-2 text-sm transition-colors ${
               viewMode === 'list'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-gray-900 text-white'
+                : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
             }`}
           >
-            <List className="h-5 w-5 mr-2" />
-            All Issues
+            <List className="h-4 w-4 mr-2" />
+            List
           </button>
 
           <button
             onClick={() => setViewMode('overview')}
-            className={`inline-flex items-center px-6 py-3 rounded-lg transition-colors duration-200 ${
+            className={`inline-flex items-center px-4 py-2 text-sm transition-colors ${
               viewMode === 'overview'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-gray-900 text-white'
+                : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
             }`}
           >
-            <BarChart3 className="h-5 w-5 mr-2" />
+            <BarChart3 className="h-4 w-4 mr-2" />
             Overview
           </button>
         </div>
 
         {/* View Mode Content */}
         {viewMode === 'map' && (
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Issues Map</h3>
+          <div className="border border-gray-200 rounded p-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Issues Map</h3>
             <div className="h-[600px]">
               <MapView issues={issues} />
             </div>
@@ -367,7 +361,7 @@ const Dashboard = () => {
             {/* Analytics Charts (Admin/Staff only) */}
             {(user?.role === 'admin' || user?.role === 'staff') && categoryStats.length > 0 && (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                <div className="bg-white rounded-lg shadow p-6">
+                <div className="border border-gray-200 p-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Issues by Category</h3>
                   <Bar
                     data={{
@@ -376,22 +370,22 @@ const Dashboard = () => {
                         {
                           label: 'Total',
                           data: categoryStats.map(cat => parseInt(cat.count)),
-                          backgroundColor: 'rgba(59, 130, 246, 0.5)',
-                          borderColor: 'rgba(59, 130, 246, 1)',
+                          backgroundColor: 'rgba(17, 24, 39, 0.5)',
+                          borderColor: 'rgba(17, 24, 39, 1)',
                           borderWidth: 1,
                         },
                         {
                           label: 'Pending',
                           data: categoryStats.map(cat => parseInt(cat.pending)),
-                          backgroundColor: 'rgba(251, 191, 36, 0.5)',
-                          borderColor: 'rgba(251, 191, 36, 1)',
+                          backgroundColor: 'rgba(156, 163, 175, 0.5)',
+                          borderColor: 'rgba(156, 163, 175, 1)',
                           borderWidth: 1,
                         },
                         {
                           label: 'Resolved',
                           data: categoryStats.map(cat => parseInt(cat.resolved)),
-                          backgroundColor: 'rgba(16, 185, 129, 0.5)',
-                          borderColor: 'rgba(16, 185, 129, 1)',
+                          backgroundColor: 'rgba(75, 85, 99, 0.5)',
+                          borderColor: 'rgba(75, 85, 99, 1)',
                           borderWidth: 1,
                         },
                       ],
@@ -410,7 +404,7 @@ const Dashboard = () => {
                   />
                 </div>
 
-                <div className="bg-white rounded-lg shadow p-6">
+                <div className="bg-white border border-gray-200 p-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Priority Distribution</h3>
                   <Doughnut
                     data={{
@@ -453,7 +447,7 @@ const Dashboard = () => {
             )}
 
             {/* Recent Issues */}
-            <div className="bg-white rounded-lg shadow">
+            <div className="bg-white border border-gray-200">
               <div className="px-6 py-4 border-b border-gray-200">
                 <h3 className="text-lg font-medium text-gray-900">Recent Issues</h3>
               </div>
@@ -466,7 +460,7 @@ const Dashboard = () => {
                     <p className="text-gray-600 mb-4">Start by reporting your first community issue.</p>
                     <Link
                       to="/report"
-                      className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                      className="inline-flex items-center px-4 py-2 bg-gray-900 text-white text-sm hover:bg-gray-800 transition-colors"
                     >
                       <Plus className="h-4 w-4 mr-2" />
                       Report Issue

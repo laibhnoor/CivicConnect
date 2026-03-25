@@ -141,14 +141,14 @@ const NotificationBell = () => {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 z-50 max-h-96 overflow-hidden flex flex-col">
+        <div className="absolute right-0 mt-2 w-80 bg-white border border-gray-200 z-50 max-h-96 overflow-hidden flex flex-col">
           <div className="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
             <h3 className="text-lg font-semibold text-gray-900">Notifications</h3>
             <div className="flex items-center space-x-2">
               {unreadCount > 0 && (
                 <button
                   onClick={markAllAsRead}
-                  className="text-sm text-blue-600 hover:text-blue-700 flex items-center"
+                  className="text-sm text-gray-900 hover:text-gray-700 flex items-center"
                 >
                   <CheckCheck className="h-4 w-4 mr-1" />
                   Mark all read
@@ -173,7 +173,7 @@ const NotificationBell = () => {
                     key={notification.id}
                     onClick={() => handleNotificationClick(notification)}
                     className={`p-4 cursor-pointer hover:bg-gray-50 transition-colors ${
-                      !notification.is_read ? 'bg-blue-50' : ''
+                      !notification.is_read ? 'bg-gray-100' : ''
                     }`}
                   >
                     <div className="flex items-start justify-between">
@@ -183,7 +183,7 @@ const NotificationBell = () => {
                             {notification.title}
                           </h4>
                           {!notification.is_read && (
-                            <span className="h-2 w-2 bg-blue-600 rounded-full flex-shrink-0"></span>
+                            <span className="h-2 w-2 bg-gray-600 rounded-full flex-shrink-0"></span>
                           )}
                         </div>
                         <p className="text-sm text-gray-600 line-clamp-2">{notification.message}</p>
@@ -200,7 +200,7 @@ const NotificationBell = () => {
                             e.stopPropagation();
                             markAsRead(notification.id);
                           }}
-                          className="ml-2 p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                          className="ml-2 p-1 text-gray-400 hover:text-gray-900 transition-colors"
                         >
                           <Check className="h-4 w-4" />
                         </button>
@@ -216,7 +216,7 @@ const NotificationBell = () => {
             <div className="px-4 py-3 border-t border-gray-200 text-center">
               <button
                 onClick={() => navigate('/notifications')}
-                className="text-sm text-blue-600 hover:text-blue-700"
+                className="text-sm text-gray-900 hover:text-gray-700"
               >
                 View all notifications
               </button>

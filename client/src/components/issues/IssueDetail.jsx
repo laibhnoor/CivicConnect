@@ -135,11 +135,11 @@ const IssueDetail = () => {
   const getStatusIcon = (status) => {
     switch (status) {
       case 'pending':
-        return <Clock className="h-5 w-5 text-yellow-500" />;
+        return <Clock className="h-5 w-5 text-gray-500" />;
       case 'in_progress':
-        return <AlertCircle className="h-5 w-5 text-blue-500" />;
+        return <AlertCircle className="h-5 w-5 text-gray-500" />;
       case 'resolved':
-        return <CheckCircle className="h-5 w-5 text-green-500" />;
+        return <CheckCircle className="h-5 w-5 text-gray-500" />;
       default:
         return <Clock className="h-5 w-5 text-gray-500" />;
     }
@@ -148,11 +148,11 @@ const IssueDetail = () => {
   const getStatusColor = (status) => {
     switch (status) {
       case 'pending':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-gray-100 text-gray-800';
       case 'in_progress':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-gray-200 text-gray-900';
       case 'resolved':
-        return 'bg-green-100 text-green-800';
+        return 'bg-gray-300 text-gray-900';
       default:
         return 'bg-gray-100 text-gray-800';
     }
@@ -176,7 +176,7 @@ const IssueDetail = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-600"></div>
       </div>
     );
   }
@@ -214,7 +214,7 @@ const IssueDetail = () => {
               <div className="flex items-center space-x-2">
                 <button
                   onClick={() => setIsEditing(!isEditing)}
-                  className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
+                  className="inline-flex items-center px-4 py-2 bg-gray-900 text-white text-sm hover:bg-gray-800 transition-colors"
                 >
                   <Edit className="h-4 w-4 mr-2" />
                   {isEditing ? 'Cancel' : 'Edit'}
@@ -222,7 +222,7 @@ const IssueDetail = () => {
                 {canDelete && (
                   <button
                     onClick={handleDelete}
-                    className="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors shadow-sm"
+                    className="inline-flex items-center px-4 py-2 border border-gray-300 text-gray-700 text-sm hover:bg-gray-50 transition-colors"
                   >
                     <Trash2 className="h-4 w-4 mr-2" />
                     Delete
@@ -237,11 +237,11 @@ const IssueDetail = () => {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Status Card */}
-            <div className="bg-white rounded-lg shadow p-6">
+            <div className="bg-white border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-semibold text-gray-900">Status</h2>
                 <span
-                  className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(
+                  className={`inline-flex items-center px-3 py-1 text-sm font-medium ${getStatusColor(
                     issue.status
                   )}`}
                 >
@@ -270,7 +270,7 @@ const IssueDetail = () => {
                         <Field
                           as="select"
                           name="status"
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-4 py-2 border border-gray-300 focus:outline-none focus:border-gray-400 text-gray-900 bg-white text-sm"
                         >
                           <option value="pending">Pending</option>
                           <option value="in_progress">In Progress</option>
@@ -286,7 +286,7 @@ const IssueDetail = () => {
                         <Field
                           as="select"
                           name="priority"
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-4 py-2 border border-gray-300 focus:outline-none focus:border-gray-400 text-gray-900 bg-white text-sm"
                         >
                           <option value="low">Low</option>
                           <option value="medium">Medium</option>
@@ -302,7 +302,7 @@ const IssueDetail = () => {
                         <Field
                           as="select"
                           name="assigned_to"
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-4 py-2 border border-gray-300 focus:outline-none focus:border-gray-400 text-gray-900 bg-white text-sm"
                         >
                           <option value="">Unassigned</option>
                           {staffUsers.map((staff) => (
@@ -321,7 +321,7 @@ const IssueDetail = () => {
                           as="textarea"
                           name="resolution_notes"
                           rows={4}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-4 py-2 border border-gray-300 focus:outline-none focus:border-gray-400 text-gray-900 bg-white text-sm"
                           placeholder="Add resolution notes..."
                         />
                       </div>
@@ -329,7 +329,7 @@ const IssueDetail = () => {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors"
+                        className="w-full bg-gray-900 text-white px-4 py-2 text-sm hover:bg-gray-800 disabled:opacity-50 transition-colors"
                       >
                         Update Issue
                       </button>
@@ -365,23 +365,23 @@ const IssueDetail = () => {
             </div>
 
             {/* Description */}
-            <div className="bg-white rounded-lg shadow p-6">
+            <div className="bg-white border border-gray-200 p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">Description</h2>
               <p className="text-gray-700 whitespace-pre-wrap">{issue.description}</p>
             </div>
 
             {/* Photos */}
             {(issue.photo_url || issue.resolution_photo_url) && (
-              <div className="bg-white rounded-lg shadow p-6">
+              <div className="bg-white border border-gray-200 p-6">
                 <h2 className="text-xl font-semibold text-gray-900 mb-4">Photos</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {issue.photo_url && (
                     <div>
                       <p className="text-sm text-gray-600 mb-2">Report Photo</p>
                       <img
-                        src={`${API_BASE_URL}${issue.photo_url}`}
+                        src={`http://localhost:5000${issue.photo_url}`}
                         alt="Issue"
-                        className="w-full h-64 object-cover rounded-lg"
+                        className="w-full h-64 object-cover"
                       />
                     </div>
                   )}
@@ -389,9 +389,9 @@ const IssueDetail = () => {
                     <div>
                       <p className="text-sm text-gray-600 mb-2">Resolution Photo</p>
                       <img
-                        src={`${API_BASE_URL}${issue.resolution_photo_url}`}
+                        src={`http://localhost:5000${issue.resolution_photo_url}`}
                         alt="Resolution"
-                        className="w-full h-64 object-cover rounded-lg"
+                        className="w-full h-64 object-cover"
                       />
                     </div>
                   )}
@@ -400,13 +400,13 @@ const IssueDetail = () => {
             )}
 
             {/* Comments */}
-            <div className="bg-white rounded-lg shadow p-6">
+            <div className="bg-white border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-semibold text-gray-900">Comments</h2>
                 {user && (
                   <button
                     onClick={() => setShowCommentForm(!showCommentForm)}
-                    className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    className="inline-flex items-center px-4 py-2 bg-gray-900 text-white text-sm hover:bg-gray-800 transition-colors"
                   >
                     <MessageSquare className="h-4 w-4 mr-2" />
                     Add Comment
@@ -429,7 +429,7 @@ const IssueDetail = () => {
                         name="comment"
                         rows={3}
                         placeholder="Write a comment..."
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2"
+                        className="w-full px-4 py-2 border border-gray-300 focus:outline-none focus:border-gray-400 text-gray-900 bg-white text-sm mb-2 resize-none"
                       />
                       <ErrorMessage name="comment" component="div" className="text-red-600 text-sm mb-2" />
                       {canEdit && (
@@ -442,14 +442,14 @@ const IssueDetail = () => {
                         <button
                           type="button"
                           onClick={() => setShowCommentForm(false)}
-                          className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                          className="px-4 py-2 border border-gray-300 text-gray-700 text-sm hover:bg-gray-50 transition-colors"
                         >
                           Cancel
                         </button>
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors"
+                          className="inline-flex items-center px-4 py-2 bg-gray-900 text-white text-sm hover:bg-gray-800 disabled:opacity-50 transition-colors"
                         >
                           <Send className="h-4 w-4 mr-2" />
                           Post Comment
@@ -465,7 +465,7 @@ const IssueDetail = () => {
                   issue.comments.map((comment) => (
                     <div
                       key={comment.id}
-                      className={`p-4 rounded-lg ${comment.is_internal ? 'bg-yellow-50 border border-yellow-200' : 'bg-gray-50'}`}
+                      className={`p-4 border ${comment.is_internal ? 'bg-gray-100 border-gray-300' : 'bg-gray-50 border-gray-200'}`}
                     >
                       <div className="flex items-start justify-between mb-2">
                         <div className="flex items-center space-x-2">
@@ -474,7 +474,7 @@ const IssueDetail = () => {
                             {comment.commenter_name}
                           </span>
                           {comment.is_internal && (
-                            <span className="text-xs bg-yellow-200 text-yellow-800 px-2 py-0.5 rounded">
+                            <span className="text-xs bg-gray-300 text-gray-900 px-2 py-0.5">
                               Internal
                             </span>
                           )}
@@ -496,7 +496,7 @@ const IssueDetail = () => {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Location */}
-            <div className="bg-white rounded-lg shadow p-6">
+            <div className="bg-white border border-gray-200 p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
                 <MapPin className="h-5 w-5 mr-2" />
                 Location
@@ -511,7 +511,7 @@ const IssueDetail = () => {
             </div>
 
             {/* Reporter Info */}
-            <div className="bg-white rounded-lg shadow p-6">
+            <div className="bg-white border border-gray-200 p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">Reporter</h2>
               <div className="space-y-2">
                 <div className="flex items-center space-x-2">
