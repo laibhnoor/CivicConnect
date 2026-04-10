@@ -13,22 +13,29 @@ import pool from "./db.js";
 dotenv.config();
 
 const app = express();
+app.set("trust proxy", 1);
 
 // Get __dirname equivalent for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // CORS configuration
-const allowedOrigins = [
-  'http://localhost:5173',                     // local frontend
-  process.env.CLIENT_URL || '',                // deployed frontend from env
-];
+const envOrigins = (process.env.CLIENT_URLS || process.env.CLIENT_URL || "")
+  .split(",")
+  .map(origin => origin.trim())
+  .filter(Boolean);
+
+const allowedOrigins = new Set([
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+  ...envOrigins,
+]);
 
 app.use(cors({
   origin: function(origin, callback) {
     // allow requests with no origin (like Postman or server-to-server)
     if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
+    if (!allowedOrigins.has(origin)) {
       const msg = `The CORS policy for this site does not allow access from the specified Origin.`;
       return callback(new Error(msg), false);
     }
@@ -61,7 +68,11 @@ console.log("✅ User routes loaded at /api/users");
 app.get("/", async (req, res) => {
   try {
     const result = await pool.query("SELECT NOW()");
-    res.json({ server: "running", time: result.rows[0].now });
+    res.json({
+      server: "running",
+      environment: process.env.NODE_ENV || "development",
+      time: result.rows[0].now,
+    });
   } catch (error) {
     console.error("DB connection error:", error);
     res.status(500).json({ error: "Database connection failed" });

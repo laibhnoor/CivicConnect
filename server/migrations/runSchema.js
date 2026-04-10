@@ -1,15 +1,22 @@
 import fs from "fs";
 import path from "path";
 import pkg from "pg";
+import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 
 const { Pool } = pkg;
+dotenv.config();
 
 // Needed because you're using ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Connect to Render PostgreSQL
+if (!process.env.DATABASE_URL) {
+  console.error("❌ DATABASE_URL is required to run migrations.");
+  process.exit(1);
+}
+
+// Connect to hosted PostgreSQL (Neon/Render-compatible)
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false }
