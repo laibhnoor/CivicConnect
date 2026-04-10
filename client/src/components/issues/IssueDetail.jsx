@@ -18,7 +18,7 @@ import MapView from '../map/MapView';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
-import { API_BASE_URL } from '../../config';
+import { API_BASE_URL, API_ORIGIN } from '../../config';
 
 
 const IssueDetail = () => {
@@ -379,7 +379,7 @@ const IssueDetail = () => {
                     <div>
                       <p className="text-sm text-gray-600 mb-2">Report Photo</p>
                       <img
-                        src={`http://localhost:5000${issue.photo_url}`}
+                        src={`${API_ORIGIN}${issue.photo_url}`}
                         alt="Issue"
                         className="w-full h-64 object-cover"
                       />
@@ -389,7 +389,7 @@ const IssueDetail = () => {
                     <div>
                       <p className="text-sm text-gray-600 mb-2">Resolution Photo</p>
                       <img
-                        src={`http://localhost:5000${issue.resolution_photo_url}`}
+                        src={`${API_ORIGIN}${issue.resolution_photo_url}`}
                         alt="Resolution"
                         className="w-full h-64 object-cover"
                       />
