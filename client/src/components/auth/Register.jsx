@@ -61,9 +61,9 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="cc-shell flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full">
-        <div>
+        <div className="cc-surface p-8 cc-reveal">
           {/* Header */}
           <div className="text-center mb-8">
             <h1 className="text-2xl font-semibold text-gray-900">CivicConnect</h1>
@@ -100,7 +100,7 @@ const Register = () => {
                       name="name"
                       type="text"
                       autoComplete="name"
-                      className="w-full px-4 py-2 border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-400 sm:text-sm"
+                      className="cc-input"
                       placeholder="Your full name"
                     />
                   </div>
@@ -118,7 +118,7 @@ const Register = () => {
                       name="email"
                       type="email"
                       autoComplete="email"
-                      className="w-full px-4 py-2 border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-400 sm:text-sm"
+                      className="cc-input"
                       placeholder="Email address"
                     />
                   </div>
@@ -134,7 +134,7 @@ const Register = () => {
                     as="select"
                     id="role"
                     name="role"
-                    className="mt-1 block w-full px-4 py-2 border border-gray-300 text-gray-900 focus:outline-none focus:border-gray-400 sm:text-sm"
+                    className="mt-1 cc-input"
                   >
                     <option value="citizen">Citizen - Report issues</option>
                     <option value="staff">Staff - Manage issues</option>
@@ -153,7 +153,7 @@ const Register = () => {
                       name="password"
                       type={showPassword ? 'text' : 'password'}
                       autoComplete="new-password"
-                      className="w-full px-4 py-2 border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-400 pr-10 sm:text-sm"
+                      className="cc-input pr-10"
                       placeholder="Create a strong password"
                     />
                     <button
@@ -182,7 +182,7 @@ const Register = () => {
                       name="confirmPassword"
                       type={showConfirmPassword ? 'text' : 'password'}
                       autoComplete="new-password"
-                      className="w-full px-4 py-2 border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-400 pr-10 sm:text-sm"
+                      className="cc-input pr-10"
                       placeholder="Confirm your password"
                     />
                     <button
@@ -205,7 +205,7 @@ const Register = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting || isLoading}
-                    className="w-full py-2 px-4 bg-gray-900 text-white text-sm font-medium hover:bg-gray-800 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    className="w-full cc-btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isLoading ? (
                       <div className="flex items-center justify-center">

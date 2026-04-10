@@ -207,16 +207,16 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="cc-shell flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="cc-shell">
       {/* Header */}
-      <header className="border-b border-gray-200">
+      <header className="border-b border-gray-200 bg-white/90 backdrop-blur-sm sticky top-0 z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <h1 className="text-xl font-semibold text-gray-900">CivicConnect</h1>
@@ -254,7 +254,7 @@ const Dashboard = () => {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="border border-gray-200 rounded p-6">
+          <div className="cc-surface cc-surface-hover p-6">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-sm text-gray-500">Total Issues</p>
@@ -264,7 +264,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="border border-gray-200 rounded p-6">
+          <div className="cc-surface cc-surface-hover p-6">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-sm text-gray-500">Pending</p>
@@ -274,7 +274,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="border border-gray-200 rounded p-6">
+          <div className="cc-surface cc-surface-hover p-6">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-sm text-gray-500">In Progress</p>
@@ -284,7 +284,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="border border-gray-200 rounded p-6">
+          <div className="cc-surface cc-surface-hover p-6">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-sm text-gray-500">Resolved</p>
@@ -299,7 +299,7 @@ const Dashboard = () => {
         <div className="flex flex-wrap gap-2 mb-8">
           <Link
             to="/report"
-            className="inline-flex items-center px-4 py-2 bg-gray-900 text-white text-sm hover:bg-gray-800 transition-colors"
+            className="cc-btn-primary"
           >
             <Plus className="h-4 w-4 mr-2" />
             Report Issue
@@ -307,7 +307,7 @@ const Dashboard = () => {
           
           <button
             onClick={() => setViewMode('map')}
-            className={`inline-flex items-center px-4 py-2 text-sm transition-colors ${
+            className={`cc-btn ${
               viewMode === 'map'
                 ? 'bg-gray-900 text-white'
                 : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
@@ -319,7 +319,7 @@ const Dashboard = () => {
           
           <button
             onClick={() => setViewMode('list')}
-            className={`inline-flex items-center px-4 py-2 text-sm transition-colors ${
+            className={`cc-btn ${
               viewMode === 'list'
                 ? 'bg-gray-900 text-white'
                 : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
@@ -331,7 +331,7 @@ const Dashboard = () => {
 
           <button
             onClick={() => setViewMode('overview')}
-            className={`inline-flex items-center px-4 py-2 text-sm transition-colors ${
+            className={`cc-btn ${
               viewMode === 'overview'
                 ? 'bg-gray-900 text-white'
                 : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
@@ -344,7 +344,7 @@ const Dashboard = () => {
 
         {/* View Mode Content */}
         {viewMode === 'map' && (
-          <div className="border border-gray-200 rounded p-6">
+          <div className="cc-surface p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Issues Map</h3>
             <div className="h-[600px]">
               <MapView issues={issues} />
@@ -361,7 +361,7 @@ const Dashboard = () => {
             {/* Analytics Charts (Admin/Staff only) */}
             {(user?.role === 'admin' || user?.role === 'staff') && categoryStats.length > 0 && (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                <div className="border border-gray-200 p-6">
+                <div className="cc-surface p-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Issues by Category</h3>
                   <Bar
                     data={{
@@ -404,7 +404,7 @@ const Dashboard = () => {
                   />
                 </div>
 
-                <div className="bg-white border border-gray-200 p-6">
+                <div className="cc-surface p-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Priority Distribution</h3>
                   <Doughnut
                     data={{
@@ -447,7 +447,7 @@ const Dashboard = () => {
             )}
 
             {/* Recent Issues */}
-            <div className="bg-white border border-gray-200">
+            <div className="cc-surface">
               <div className="px-6 py-4 border-b border-gray-200">
                 <h3 className="text-lg font-medium text-gray-900">Recent Issues</h3>
               </div>
@@ -460,7 +460,7 @@ const Dashboard = () => {
                     <p className="text-gray-600 mb-4">Start by reporting your first community issue.</p>
                     <Link
                       to="/report"
-                      className="inline-flex items-center px-4 py-2 bg-gray-900 text-white text-sm hover:bg-gray-800 transition-colors"
+                      className="cc-btn-primary"
                     >
                       <Plus className="h-4 w-4 mr-2" />
                       Report Issue

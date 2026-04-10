@@ -3,16 +3,29 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Manrope', 'Segoe UI', sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #111827;
+  background-color: #f8fafc;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --cc-bg: #f8fafc;
+  --cc-surface: #ffffff;
+  --cc-surface-soft: #f9fafb;
+  --cc-text: #111827;
+  --cc-text-muted: #6b7280;
+  --cc-border: #e5e7eb;
+  --cc-border-strong: #d1d5db;
+  --cc-brand: #111827;
+  --cc-brand-hover: #1f2937;
+  --cc-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --cc-shadow-md: 0 10px 25px rgba(15, 23, 42, 0.08);
+  --cc-shadow-lg: 0 22px 45px rgba(15, 23, 42, 0.11);
+  --cc-radius: 14px;
 }
 
 body {
@@ -21,6 +34,11 @@ body {
   min-width: 320px;
   min-height: 100vh;
   width: 100%;
+  background:
+    radial-gradient(circle at 8% 0%, rgba(209, 213, 219, 0.28), transparent 32%),
+    radial-gradient(circle at 95% 100%, rgba(229, 231, 235, 0.5), transparent 36%),
+    var(--cc-bg);
+  color: var(--cc-text);
 }
 
 html {
@@ -28,6 +46,32 @@ html {
   padding: 0;
   width: 100%;
   height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a,
+button,
+input,
+select,
+textarea,
+.transition-base {
+  transition: all 180ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Custom scrollbar */
@@ -72,6 +116,21 @@ html {
   animation: fadeIn 0.3s ease-out;
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cc-reveal {
+  animation: fadeInUp 0.45s ease-out both;
+}
+
 /* Map container styles */
 .leaflet-container {
   height: 400px;
@@ -81,7 +140,7 @@ html {
 
 /* Custom button styles */
 .btn-primary {
-  @apply bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200;
+  @apply bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors duration-200;
 }
 
 .btn-secondary {
@@ -90,6 +149,57 @@ html {
 
 .btn-danger {
   @apply bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors duration-200;
+}
+
+@layer components {
+  .cc-shell {
+    @apply min-h-screen;
+  }
+
+  .cc-surface {
+    @apply bg-white border border-gray-200;
+    border-radius: var(--cc-radius);
+    box-shadow: var(--cc-shadow-sm);
+  }
+
+  .cc-surface-hover {
+    @apply hover:border-gray-300;
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  }
+
+  .cc-surface-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--cc-shadow-md);
+  }
+
+  .cc-input {
+    @apply w-full px-4 py-2.5 border border-gray-300 text-gray-900 placeholder-gray-400 bg-white text-sm;
+    border-radius: 12px;
+  }
+
+  .cc-input:focus {
+    @apply outline-none border-gray-400;
+    box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.08);
+  }
+
+  .cc-btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium;
+    border-radius: 12px;
+  }
+
+  .cc-btn-primary {
+    @apply cc-btn bg-gray-900 text-white hover:bg-gray-800;
+    box-shadow: var(--cc-shadow-sm);
+  }
+
+  .cc-btn-secondary {
+    @apply cc-btn border border-gray-300 text-gray-700 bg-white hover:bg-gray-50;
+  }
+
+  .cc-badge {
+    @apply inline-flex items-center px-2.5 py-1 text-xs font-medium;
+    border-radius: 999px;
+  }
 }
 
 /* Status badges */

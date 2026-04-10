@@ -215,7 +215,7 @@ const IssueList = ({ userRole = 'citizen' }) => {
   return (
     <div className="space-y-4">
       {/* Search and Filter Bar */}
-      <div className="border border-gray-200 p-4">
+      <div className="cc-surface p-4">
         <div className="flex flex-col md:flex-row gap-4">
           {/* Search */}
           <div className="flex-1 relative">
@@ -225,14 +225,14 @@ const IssueList = ({ userRole = 'citizen' }) => {
               placeholder="Search issues..."
               value={filters.search}
               onChange={(e) => setFilters({ ...filters, search: e.target.value })}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 focus:outline-none focus:border-gray-400 text-gray-900 bg-white text-sm"
+              className="cc-input pl-10"
             />
           </div>
 
           {/* Filter Toggle */}
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center px-4 py-2 border border-gray-300 hover:bg-gray-50 transition-colors text-gray-700 bg-white text-sm"
+            className="cc-btn-secondary"
           >
             <Filter className="h-4 w-4 mr-2 text-gray-600" />
             <span>Filters</span>
@@ -249,7 +249,7 @@ const IssueList = ({ userRole = 'citizen' }) => {
               <select
                 value={filters.status}
                 onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:border-gray-400 text-gray-900 bg-white text-sm"
+                className="cc-input"
               >
                 {statuses.map((status) => (
                   <option key={status.value} value={status.value}>
@@ -266,7 +266,7 @@ const IssueList = ({ userRole = 'citizen' }) => {
               <select
                 value={filters.category}
                 onChange={(e) => setFilters({ ...filters, category: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:border-gray-400 text-gray-900 bg-white text-sm"
+                className="cc-input"
               >
                 {categories.map((category) => (
                   <option key={category.value} value={category.value}>
@@ -283,7 +283,7 @@ const IssueList = ({ userRole = 'citizen' }) => {
               <select
                 value={filters.priority}
                 onChange={(e) => setFilters({ ...filters, priority: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:border-gray-400 text-gray-900 bg-white text-sm"
+                className="cc-input"
               >
                 {priorities.map((priority) => (
                   <option key={priority.value} value={priority.value}>
@@ -306,7 +306,7 @@ const IssueList = ({ userRole = 'citizen' }) => {
       </div>
 
       {/* Issues List */}
-      <div className="border border-gray-200 overflow-hidden">
+      <div className="cc-surface overflow-hidden">
         {issues.length === 0 ? (
           <div className="p-12 text-center">
             <AlertCircle className="h-12 w-12 text-gray-300 mx-auto mb-4" />
@@ -330,7 +330,7 @@ const IssueList = ({ userRole = 'citizen' }) => {
                           {issue.title}
                         </h3>
                         <span
-                          className={`inline-flex items-center px-2.5 py-0.5 text-xs font-medium ${getStatusColor(
+                          className={`cc-badge ${getStatusColor(
                             issue.status
                           )}`}
                         >
@@ -340,7 +340,7 @@ const IssueList = ({ userRole = 'citizen' }) => {
                           </span>
                         </span>
                         <span
-                          className={`inline-flex items-center px-2.5 py-0.5 text-xs font-medium ${getPriorityColor(
+                          className={`cc-badge ${getPriorityColor(
                             issue.priority
                           )}`}
                         >
